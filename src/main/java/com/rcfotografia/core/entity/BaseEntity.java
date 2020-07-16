@@ -1,13 +1,13 @@
 package com.rcfotografia.core.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.time.LocalDateTime;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
-import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
-import java.time.LocalDateTime;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -19,7 +19,7 @@ public abstract class BaseEntity<T> {
     private LocalDateTime alteracao;
     private LocalDateTime inclusao;
     private LocalDateTime remocao;
-    private Boolean excluido;
+    private Boolean excluido = false;
 
     @PrePersist
     private void prePersist() {
@@ -29,10 +29,5 @@ public abstract class BaseEntity<T> {
     @PreUpdate
     private void preUpdates() {
         this.alteracao = LocalDateTime.now();
-    }
-
-    @PreRemove
-    private void preRemove() {
-        this.remocao = LocalDateTime.now();
     }
 }
