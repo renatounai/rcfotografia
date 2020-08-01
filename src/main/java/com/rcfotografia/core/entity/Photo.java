@@ -1,12 +1,10 @@
 package com.rcfotografia.core.entity;
 
-import java.io.Serializable;
+import java.time.LocalDateTime;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.PastOrPresent;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -19,16 +17,12 @@ import lombok.Setter;
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @NoArgsConstructor @AllArgsConstructor
-public class Album extends BaseEntity<Long> implements Serializable {
-	private static final long serialVersionUID = -4499673179479169393L;
-
+public class Photo extends BaseEntity<String> {
+	
 	@Id
     @EqualsAndHashCode.Include
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-
+	private String id;
 	
-    @Column(length = 200)
-    private String name;
-
+	@PastOrPresent
+	private LocalDateTime archieved;
 }

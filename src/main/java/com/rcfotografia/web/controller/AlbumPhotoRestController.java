@@ -15,43 +15,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rcfotografia.core.entity.Album;
-import com.rcfotografia.core.service.AlbumService;
+import com.rcfotografia.core.entity.AlbumPhoto;
+import com.rcfotografia.core.service.AlbumPhotoService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/albums")
+@RequestMapping("/albumPhotos")
 @RequiredArgsConstructor
-public class AlbumRestController extends BaseRestController {
+public class AlbumPhotoRestController extends BaseRestController {
 
 	@Autowired
-    private final AlbumService service;
+    private final AlbumPhotoService service;
 
     @GetMapping
-    public ResponseEntity<List<Album>> getAlbuns() {
-        List<Album> list = service.findAll();
+    public ResponseEntity<List<AlbumPhoto>> getAlbuns() {
+        List<AlbumPhoto> list = service.findAll();
         return write(list);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Album> getAlbuns(@PathVariable long id) {
+    public ResponseEntity<AlbumPhoto> getAlbuns(@PathVariable long id) {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<Album> insert(@RequestBody Album album) {
-        album.setId(null);
-        return new ResponseEntity<>(service.save(album), HttpStatus.CREATED);
+    public ResponseEntity<AlbumPhoto> insert(@RequestBody AlbumPhoto albumPhoto) {
+        albumPhoto.setId(null);
+        return new ResponseEntity<>(service.save(albumPhoto), HttpStatus.CREATED);
 
     }
 
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Album album, @PathVariable long id) {
-        Album currentAlbum = service.findById(id);
-        currentAlbum.setName(album.getName());
-        service.save(currentAlbum);
+    public void update(@RequestBody AlbumPhoto albumPhoto, @PathVariable long id) {
+        AlbumPhoto currentAlbumPhoto = service.findById(id);        
+        service.save(currentAlbumPhoto);
     }
 
     @DeleteMapping("/{id}")

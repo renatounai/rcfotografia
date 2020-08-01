@@ -36,39 +36,39 @@ public class AlbumRestControllerTest {
 	@Autowired
 	public AlbumRepository repository;
 	
-	private List<Album> albuns = new ArrayList<>();
+	private List<Album> albums = new ArrayList<>();
 	
 	@Before
 	public void prepare() {
 		repository.deleteAll();
 		
-		Album album = new Album(1, "Ensaio com a Dani Melo");
+		Album album = new Album(1L, "Ensaio com a Dani Melo");
 		album = repository.save(album);
-		albuns.add(album);
+		albums.add(album);
 		
-		album = new Album(2, "Ensaio com a Bianca");
+		album = new Album(2L, "Ensaio com a Bianca");
 		album = repository.save(album);
-		albuns.add(album);
+		albums.add(album);
 		
-		album = new Album(3, "Lara");
+		album = new Album(3L, "Lara");
 		album = repository.save(album);
-		albuns.add(album);
+		albums.add(album);
 		
-		album = new Album(4, "Kelly");
+		album = new Album(4L, "Kelly");
 		album = repository.save(album);
-		albuns.add(album);
+		albums.add(album);
 	}
 	
 	@Test
-	public void testGetAlbuns() {
+	public void testGetAlbums() {
 		ResponseEntity<Album[]> response = testRestTemplate.getForEntity("/albums", Album[].class);
 		assertNotNull(response.getBody());
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
-		assertEquals(response.getBody().length, 4);
+		assertEquals(response.getBody().length, albums.size());
 	}
 	
 	@Test
-	public void testGetAlbunsNoContent() {
+	public void testGetAlbumsNoContent() {
 		repository.deleteAll();
 		
 		ResponseEntity<Album[]> response = testRestTemplate.getForEntity("/albums", Album[].class);
@@ -78,7 +78,7 @@ public class AlbumRestControllerTest {
 	
 	@Test
 	public void testGetById() {
-		Album album = albuns.stream().findFirst().orElseThrow();
+		Album album = albums.stream().findFirst().orElseThrow();
 		
 		ResponseEntity<Album> response = testRestTemplate.getForEntity("/albums/{id}", Album.class, album.getId());
 		assertNotNull(response.getBody());
@@ -88,13 +88,15 @@ public class AlbumRestControllerTest {
 	
 	@Test
 	public void testNotFound() {
-		ResponseEntity<Album> response = testRestTemplate.getForEntity("/albums/20", Album.class);		
+		Album album = albums.stream().findFirst().orElseThrow();
+		album.setId(album.getId() + 200);
+		ResponseEntity<Album> response = testRestTemplate.getForEntity("/albums/{id}", Album.class, album.getId());		
 		assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
 	}
 	
 	@Test
 	public void testGetByIdCheckName() {
-		Album album = albuns.stream().filter(a -> a.getName().equals("Ensaio com a Dani Melo")).findAny().orElseThrow();
+		Album album = albums.stream().filter(a -> a.getName().equals("Ensaio com a Dani Melo")).findAny().orElseThrow();
 		
 		ResponseEntity<Album> response = testRestTemplate.getForEntity("/albums/{id}", Album.class, album.getId());		
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
@@ -129,7 +131,7 @@ public class AlbumRestControllerTest {
 	
 	@Test
 	public void testUpdate() {
-		Album album = albuns.stream().findFirst().orElseThrow();
+		Album album = albums.stream().findFirst().orElseThrow();
 		album.setName("Ensaio da Luana");
 		ResponseEntity<Album> response = testRestTemplate.exchange("/albums/{id}", HttpMethod.POST, new HttpEntity<>(album), Album.class, album.getId());
 		
@@ -138,14 +140,14 @@ public class AlbumRestControllerTest {
 
 	@Test
 	public void testDelete() {
-		Album album = albuns.stream().findFirst().orElseThrow();
+		Album album = albums.stream().findFirst().orElseThrow();
 		ResponseEntity<Album> response = testRestTemplate.exchange("/albums/{id}", HttpMethod.DELETE, new HttpEntity<>(album), Album.class, album.getId());
 		assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
 	}
 	
 	@Test
 	public void testDeleteNotFound() {
-		Album album = albuns.stream().findFirst().orElseThrow();
+		Album album = albums.stream().findFirst().orElseThrow();
 		album.setId(album.getId() + 200);
 		ResponseEntity<Album> response = testRestTemplate.exchange("/albums/{id}", HttpMethod.DELETE, new HttpEntity<>(album), Album.class, album.getId());
 		assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);

@@ -1,5 +1,6 @@
 package com.rcfotografia.web.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,51 +13,58 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.rcfotografia.core.entity.Album;
-import com.rcfotografia.core.service.AlbumService;
+import com.rcfotografia.core.entity.Photo;
+import com.rcfotografia.core.service.PhotoService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/albums")
+@RequestMapping("/photos")
 @RequiredArgsConstructor
-public class AlbumRestController extends BaseRestController {
+public class PhotoRestController extends BaseRestController {
 
 	@Autowired
-    private final AlbumService service;
+    private final PhotoService service;
 
     @GetMapping
-    public ResponseEntity<List<Album>> getAlbuns() {
-        List<Album> list = service.findAll();
+    public ResponseEntity<List<Photo>> getAlbuns() {
+        List<Photo> list = service.findAll();
         return write(list);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Album> getAlbuns(@PathVariable long id) {
+    public ResponseEntity<Photo> getAlbuns(@PathVariable String id) {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<Album> insert(@RequestBody Album album) {
-        album.setId(null);
-        return new ResponseEntity<>(service.save(album), HttpStatus.CREATED);
+    public ResponseEntity<Photo> insert(@RequestBody Photo photo) {
+        photo.setId(null);
+        return new ResponseEntity<>(service.save(photo), HttpStatus.CREATED);
 
+    }
+    
+    @PostMapping("/upload")
+    public void upload(@RequestParam("photo")MultipartFile photo) throws IOException {
+    	service.upload(photo);
     }
 
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Album album, @PathVariable long id) {
-        Album currentAlbum = service.findById(id);
-        currentAlbum.setName(album.getName());
-        service.save(currentAlbum);
+    public void update(@RequestBody Photo photo, @PathVariable String id) {
+        Photo currentPhoto = service.findById(id);
+        currentPhoto.setArchieved(currentPhoto.getArchieved());
+        service.save(currentPhoto);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable long id) {
+    public void delete(@PathVariable String id) {
         service.delete(id);
     }
 

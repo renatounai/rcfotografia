@@ -6,34 +6,31 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rcfotografia.core.entity.Album;
+import com.rcfotografia.core.entity.AlbumPhoto;
 import com.rcfotografia.core.exception.NotFoundException;
-import com.rcfotografia.core.repository.AlbumRepository;
+import com.rcfotografia.core.repository.AlbumPhotoRepository;
 
 @Service
-public class AlbumService {
+public class AlbumPhotoService {
+	private @Autowired AlbumPhotoRepository repository;
 
-	private @Autowired AlbumRepository repository;
-
-    public List<Album> findAll() {
+    public List<AlbumPhoto> findAll() {
         return repository.findAll();
     }
     
-    public Optional<Album> findByIdQuitely(Long id) {
+    public Optional<AlbumPhoto> findByIdQuitely(Long id) {
         return repository.findById(id);
     }
 
-    public Album findById(Long id) {
+    public AlbumPhoto findById(Long id) {
         return findByIdQuitely(id).orElseThrow(NotFoundException::new);
     }
 
-    public Album save(Album album) {
-        return repository.save(album);
+    public AlbumPhoto save(AlbumPhoto photo) {
+        return repository.save(photo);
     }
 
     public void delete(Long id) {
         repository.delete(findById(id));
     }
-
-
 }
