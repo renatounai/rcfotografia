@@ -1,5 +1,6 @@
 package com.rcfotografia.core.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.MappedSuperclass;
@@ -12,14 +13,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class BaseEntity<T> {
+public abstract class BaseEntity<T>  {
     public abstract T getId();
     public abstract void setId(T id);
 
     private LocalDateTime alteracao;
     private LocalDateTime inclusao;
-    private LocalDateTime remocao;
-    private Boolean excluido = false;
 
     @PrePersist
     private void prePersist() {

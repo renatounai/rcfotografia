@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rcfotografia.core.entity.Album;
@@ -20,7 +21,7 @@ import com.rcfotografia.core.service.AlbumService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/albuns")
+@RequestMapping("/albums")
 @RequiredArgsConstructor
 public class AlbumRestController extends BaseRestController {
 
@@ -46,13 +47,15 @@ public class AlbumRestController extends BaseRestController {
     }
 
     @PostMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody Album album, @PathVariable int id) {
-        Album albumAtual = service.findById(id);
-        albumAtual.setNome(album.getNome());
-        service.save(albumAtual);
+        Album currentAlbum = service.findById(id);
+        currentAlbum.setName(album.getName());
+        service.save(currentAlbum);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
         service.delete(id);
     }

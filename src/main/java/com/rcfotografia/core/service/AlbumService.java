@@ -24,6 +24,8 @@ public class AlbumService {
     }
 
     public Album findById(Integer id) {
+    	List<Album> findAll = repository.findAll();
+    	
         return findByIdQuitely(id).orElseThrow( () -> new NotFoundException());
     }
 

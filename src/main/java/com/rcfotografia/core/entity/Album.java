@@ -1,27 +1,33 @@
 package com.rcfotografia.core.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-
-import javax.persistence.*;
 
 @Entity
 @Setter
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-@SQLDelete(sql = "update Album set excluido = true where id = ?")
-@Where(clause = "excluido = false")
-public class Album extends BaseEntity<Integer> {
+@NoArgsConstructor @AllArgsConstructor
+public class Album extends BaseEntity<Integer> implements Serializable {
+	private static final long serialVersionUID = -4499673179479169393L;
 
-    @Id
+	@Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Column(length = 200)
-    private String nome;
+    private String name;
 
 }
