@@ -7,7 +7,6 @@ import static org.junit.Assert.assertNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,32 +36,9 @@ public class PhotoRestControllerTest {
 	
 	private List<Photo> photos = new ArrayList<>();
 	
-	@Before
-	public void prepare() {
-		repository.deleteAll();
-		try {
-		Photo photo = new Photo();		
-		photo = repository.save(photo);
-		photos.add(photo);
-		
-		photo = new Photo();
-		photo = repository.save(photo);
-		photos.add(photo);
-		
-		photo = new Photo();
-		photo = repository.save(photo);
-		photos.add(photo);
-		
-		photo = new Photo();
-		photo = repository.save(photo);
-		photos.add(photo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 	@Test
-	public void testGetAlbuns() {
+	public void testGetPhotos() {
 		ResponseEntity<Photo[]> response = testRestTemplate.getForEntity("/photos", Photo[].class);
 		assertNotNull(response.getBody());
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
@@ -70,7 +46,7 @@ public class PhotoRestControllerTest {
 	}
 	
 	@Test
-	public void testGetAlbunsNoContent() {
+	public void testGetPhotosNoContent() {
 		repository.deleteAll();
 		
 		ResponseEntity<Photo[]> response = testRestTemplate.getForEntity("/photos", Photo[].class);

@@ -3,6 +3,7 @@ package com.rcfotografia.web.controller;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.imaging.ImageReadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +51,7 @@ public class PhotoRestController extends BaseRestController {
     }
     
     @PostMapping("/upload")
-    public void upload(@RequestParam("photo")MultipartFile photo) throws IOException {
+    public void upload(@RequestParam("photo")MultipartFile photo) throws IOException, ImageReadException {
     	service.upload(photo);
     }
 

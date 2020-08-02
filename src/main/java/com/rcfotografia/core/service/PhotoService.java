@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.apache.commons.imaging.ImageFormats;
+import org.apache.commons.imaging.ImageInfo;
+import org.apache.commons.imaging.ImageReadException;
+import org.apache.commons.imaging.Imaging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.rcfotografia.core.entity.Photo;
 import com.rcfotografia.core.exception.NotFoundException;
+import com.rcfotografia.core.exception.PhotoException;
 import com.rcfotografia.core.repository.PhotoRepository;
 
 @Service
@@ -48,7 +53,19 @@ public class PhotoService {
     
     public void upload(final MultipartFile foto) throws IOException {
     	final String uuid =  UUID.nameUUIDFromBytes(foto.getBytes()).toString();
-    	Photo photo = findByIdQuitely(uuid).orElseGet(() -> {
+    	
+    	ImageInfo imageInfo;
+		try {
+			imageInfo = Imaging.getImageInfo(foto.getBytes());
+			if (!imageInfo.getFormat().equals(ImageFormats.JPEG) && !imageInfo.getFormat().equals(ImageFormats.PNG)) {
+	    		throw new ImageReadException("Formato de imagem inválido!");
+	    	}
+		} catch (ImageReadException | IOException e) {
+			throw new PhotoException("Format inválido! Apenas arquivos JPG ou PNG podem ser enviados.", e);
+		}
+    	
+    	
+    	final Photo photo = findByIdQuitely(uuid).orElseGet(() -> {
     		Photo newPhoto = new Photo();
     		newPhoto.setId(uuid);
     		return newPhoto;
