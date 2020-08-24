@@ -1,16 +1,15 @@
 package com.rcfotografia.rest;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,13 +19,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.rcfotografia.core.entity.Album;
 import com.rcfotografia.core.repository.AlbumRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@RunWith(SpringRunner.class)
+@ActiveProfiles("dev")
 @AutoConfigureTestDatabase
 public class AlbumRestControllerTest {
 
@@ -38,8 +37,11 @@ public class AlbumRestControllerTest {
 	
 	private List<Album> albums = new ArrayList<>();
 	
-	@Before
-	public void prepare() {
+	
+	@BeforeEach
+	public void prepare() {		
+		System.out.println(repository.findById(1L).orElseGet(Album::new).getName());
+		
 		repository.deleteAll();
 		
 		Album album = new Album(1L, "Ensaio com a Dani Melo");
@@ -66,7 +68,7 @@ public class AlbumRestControllerTest {
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
 		assertEquals(response.getBody().length, albums.size());
 	}
-	
+		
 	@Test
 	public void testGetAlbumsNoContent() {
 		repository.deleteAll();
@@ -99,7 +101,7 @@ public class AlbumRestControllerTest {
 		Album album = albums.stream().filter(a -> a.getName().equals("Ensaio com a Dani Melo")).findAny().orElseThrow();
 		
 		ResponseEntity<Album> response = testRestTemplate.getForEntity("/albums/{id}", Album.class, album.getId());		
-		assertEquals(response.getStatusCode(), HttpStatus.OK);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertNotNull(response.getBody());
 		assertEquals(response.getBody().getName(), "Ensaio com a Dani Melo");
 	}
