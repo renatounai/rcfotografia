@@ -1,4 +1,4 @@
-package com.rcfotografia.core.service;
+package com.rcfotografia.dominio.photo;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,10 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.rcfotografia.core.entity.Photo;
-import com.rcfotografia.core.exception.NotFoundException;
-import com.rcfotografia.core.exception.PhotoException;
-import com.rcfotografia.core.repository.PhotoRepository;
+import com.rcfotografia.dominio.exception.NotFoundException;
 
 @Service
 public class PhotoService {

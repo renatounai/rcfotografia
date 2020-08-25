@@ -1,10 +1,12 @@
-package com.rcfotografia.core.entity;
+package com.rcfotografia.dominio.photo;
 
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.PastOrPresent;
+
+import com.rcfotografia.dominio.BaseEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

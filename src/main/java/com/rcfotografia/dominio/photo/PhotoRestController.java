@@ -1,4 +1,4 @@
-package com.rcfotografia.web.controller;
+package com.rcfotografia.dominio.photo;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.rcfotografia.core.entity.Photo;
-import com.rcfotografia.core.service.PhotoService;
+import com.rcfotografia.dominio.BaseRestController;
 
 import lombok.RequiredArgsConstructor;
 

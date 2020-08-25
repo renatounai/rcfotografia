@@ -18,8 +18,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.rcfotografia.core.entity.Photo;
-import com.rcfotografia.core.repository.PhotoRepository;
+import com.rcfotografia.dominio.photo.Photo;
+import com.rcfotografia.dominio.photo.PhotoRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase

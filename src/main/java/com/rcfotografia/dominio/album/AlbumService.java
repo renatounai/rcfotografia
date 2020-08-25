@@ -1,4 +1,4 @@
-package com.rcfotografia.core.service;
+package com.rcfotografia.dominio.album;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rcfotografia.core.entity.Album;
-import com.rcfotografia.core.exception.NotFoundException;
-import com.rcfotografia.core.repository.AlbumRepository;
+import com.rcfotografia.dominio.exception.NotFoundException;
 
 @Service
 public class AlbumService {

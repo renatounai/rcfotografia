@@ -1,4 +1,4 @@
-package com.rcfotografia.web.controller;
+package com.rcfotografia.dominio;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
