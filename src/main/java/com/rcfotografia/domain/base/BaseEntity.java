@@ -1,4 +1,4 @@
-package com.rcfotografia.dominio;
+package com.rcfotografia.domain.base;
 
 import java.time.LocalDateTime;
 

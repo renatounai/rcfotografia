@@ -1,4 +1,4 @@
-package com.rcfotografia.dominio;
+package com.rcfotografia.domain.base;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

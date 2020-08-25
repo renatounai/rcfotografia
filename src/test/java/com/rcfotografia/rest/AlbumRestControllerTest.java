@@ -21,8 +21,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.rcfotografia.dominio.album.Album;
-import com.rcfotografia.dominio.album.AlbumRepository;
+import com.rcfotografia.domain.album.Album;
+import com.rcfotografia.domain.album.AlbumRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("dev")

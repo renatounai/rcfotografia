@@ -1,4 +1,4 @@
-package com.rcfotografia.dominio.albumPhoto;
+package com.rcfotografia.domain.albumPhoto;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,9 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.rcfotografia.dominio.BaseEntity;
-import com.rcfotografia.dominio.album.Album;
-import com.rcfotografia.dominio.photo.Photo;
+import com.rcfotografia.domain.album.Album;
+import com.rcfotografia.domain.base.BaseEntity;
+import com.rcfotografia.domain.photo.Photo;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

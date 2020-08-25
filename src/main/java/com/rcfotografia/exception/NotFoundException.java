@@ -1,4 +1,4 @@
-package com.rcfotografia.dominio.exception;
+package com.rcfotografia.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

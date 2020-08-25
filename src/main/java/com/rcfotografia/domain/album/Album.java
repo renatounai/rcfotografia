@@ -1,4 +1,4 @@
-package com.rcfotografia.dominio.album;
+package com.rcfotografia.domain.album;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.rcfotografia.dominio.BaseEntity;
+import com.rcfotografia.domain.base.BaseEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

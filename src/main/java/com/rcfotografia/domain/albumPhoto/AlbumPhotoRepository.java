@@ -1,12 +1,12 @@
-package com.rcfotografia.dominio.albumPhoto;
+package com.rcfotografia.domain.albumPhoto;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.rcfotografia.dominio.album.Album;
-import com.rcfotografia.dominio.photo.Photo;
+import com.rcfotografia.domain.album.Album;
+import com.rcfotografia.domain.photo.Photo;
 
 @Repository
 public interface AlbumPhotoRepository extends JpaRepository<AlbumPhoto, Long> {
