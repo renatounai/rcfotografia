@@ -1,4 +1,4 @@
-package com.rcfotografia.dominio.photo;
+package com.rcfotografia.domain.photo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

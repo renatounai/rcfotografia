@@ -1,4 +1,4 @@
-package com.rcfotografia.dominio.photo;
+package com.rcfotografia.domain.photo;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

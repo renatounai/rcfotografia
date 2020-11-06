@@ -1,4 +1,4 @@
-package com.rcfotografia.dominio.photo;
+package com.rcfotografia.domain.photo;
 
 import java.time.LocalDateTime;
 
@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.PastOrPresent;
 
-import com.rcfotografia.dominio.BaseEntity;
+import com.rcfotografia.domain.BaseEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

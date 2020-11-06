@@ -1,4 +1,4 @@
-package com.rcfotografia.dominio.albumPhoto;
+package com.rcfotografia.domain.albumPhoto;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rcfotografia.dominio.BaseRestController;
+import com.rcfotografia.domain.BaseRestController;
 
 import lombok.RequiredArgsConstructor;
 

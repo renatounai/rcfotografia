@@ -1,4 +1,4 @@
-package com.rcfotografia.dominio.photo;
+package com.rcfotografia.domain.photo;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.rcfotografia.dominio.exception.NotFoundException;
+import com.rcfotografia.exception.NotFoundException;
 
 @Service
 public class PhotoService {

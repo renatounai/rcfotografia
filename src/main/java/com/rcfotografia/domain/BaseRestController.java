@@ -1,9 +1,9 @@
-package com.rcfotografia.dominio;
+package com.rcfotografia.domain;
+
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
 
 public class BaseRestController {
 
